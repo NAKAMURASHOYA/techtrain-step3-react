@@ -18,7 +18,9 @@ useEffect(() => {
       {error && <div>エラーが発生しました: {error.message}</div>}
       <ul>
         {threads.map(thread => (
-          <li key={thread.id}>{thread.title}</li>
+          <li className = "thread-item" key={thread.id}>
+            {thread.title}
+          </li>
           ))}
       </ul>
     </div>
