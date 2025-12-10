@@ -1,42 +1,119 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* --- ヘッダーエリア --- */
+.app-header {
+  height: 60px;
+  width: 100%;
+  padding: 0 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; /* スクロールしても追従させる */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* 軽い影 */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 0.5px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.thread-create-button {
+  padding: 8px 20px;
+  background: #3472dc;
+  color: #fff;
+  border: 2px solid #3472dc;      /* 枠線を追加 */
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.thread-create-button:hover {
+  background: #fff;
+  color: #3472dc;
 }
 
-.card {
-  padding: 2em;
+/* --- ハンバーガーメニューアイコン --- */
+.menu-icon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 100;
 }
 
-.read-the-docs {
-  color: #888;
+.menu-icon span {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  border-radius: 4px;
+  transition: all 0.4s;
+}
+
+/* 3本線の配置 */
+.menu-icon span:nth-of-type(1) { top: 4px; }
+.menu-icon span:nth-of-type(2) { top: 13px; }
+.menu-icon span:nth-of-type(3) { top: 22px; }
+
+/* Active時のアニメーション（×印になる） */
+.menu-icon.active span:nth-of-type(1) {
+  top: 13px;
+  transform: rotate(45deg);
+}
+.menu-icon.active span:nth-of-type(2) {
+  opacity: 0;
+}
+.menu-icon.active span:nth-of-type(3) {
+  top: 13px;
+  transform: rotate(-45deg);
+}
+
+/* --- メインコンテンツエリア --- */
+main {
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.main-title {
+  font-size: 1.75rem;
+  margin-bottom: 24px;
+  color: #333;
+  border-left: 5px solid #000;
+  padding-left: 16px;
+}
+
+/* --- スレッドリスト --- */
+.thread-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.thread-item {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.thread-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* ホバーで少し浮く */
+}
+
+.thread-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1a0dab; /* リンクっぽい青、または黒 */
+  margin-bottom: 8px;
 }
