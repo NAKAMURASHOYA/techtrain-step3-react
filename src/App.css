@@ -1,17 +1,23 @@
 /* --- ヘッダーエリア --- */
 .app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 60px;
   width: 100%;
   padding: 0 16px;
   background-color: #ffffff;
   border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: sticky; /* スクロールしても追従させる */
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* 軽い影 */
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* アイテム間のスペース */
 }
 
 .app-title {
@@ -25,7 +31,7 @@
   padding: 8px 20px;
   background: #3472dc;
   color: #fff;
-  border: 2px solid #3472dc;      /* 枠線を追加 */
+  border: 2px solid #3472dc; /* 枠線を追加 */
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;

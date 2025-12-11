@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Routes, Route ,useLocation } from "react-router-dom";
 import './App.css';
+import NewThread from './NewThread';
 
 function App() {
   const [threads, setThreads] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   // API取得
   useEffect(() => {
@@ -12,18 +14,17 @@ function App() {
       .then(res => res.json())
       .then(data => setThreads(data))
       .catch(err => console.error(err));
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div>
       {/* ヘッダー */}
       <header className="app-header">
-        <div className="app-title">掲示板アプリ</div>
-                <div className="thread-create-button-area">
+        <Link to="/" className="app-title">掲示板アプリ</Link>
+        <div className="header-actions">
           <Link to="/threads/new" className="thread-create-button">
           新規作成
           </Link>
-        </div>
         
         {/* ハンバーガーアイコン */}
         <div 
@@ -34,11 +35,17 @@ function App() {
           <span></span>
           <span></span>
         </div>
+        </div>
       </header>
 
       {/* メインエリア */}
       <main>
-        <h1 className="main-title">New Threads</h1>
+        <Routes>
+          <Route 
+            path="/"
+            element={
+              <>
+                <h1 className="main-title">New Threads</h1>
         
         {/* スレッド一覧 */}
         <ul className="thread-list">
@@ -48,6 +55,11 @@ function App() {
             </li>
           ))}
         </ul>
+        </>
+        }
+        />
+        <Route path="threads/new" element={<NewThread />} />
+        </Routes>
       </main>
     </div>
   );
