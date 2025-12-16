@@ -1,33 +1,41 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { fetchThreads } from "./api/threads";
-import ThreadList from "./components/threadList";
-import NewThread from "./components/newThread";
-import Header from "./components/header";
+import { fetchThreads } from "./api/Threads";
+import ThreadList from "./components/ThreadList";
+import NewThread from "./components/NewThread";
+import Header from "./components/Header";
+import PostList from "./components/PostList";
+
 
 function App() {
   const [threads, setThreads] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
 
   // スレッド一覧再取得
-  async function refreshThreads() {
+  const refreshThreads = async () => {
     try {
       const data = await fetchThreads();
       setThreads(data);
     } catch (e) {
       console.error("スレッド取得失敗", e);
-      setThreads(["エラーです"]); // またはエラーメッセージ
+      setThreads([]);
     }
-  }
-
+  };
+  
   useEffect(() => {
-    const loadThreads = async () => {
-      await refreshThreads();
+    const loadData = async () => {
+      try {
+        const data = await fetchThreads();
+        setThreads(data);
+      } catch (e) {
+        console.error("初回スレッド取得失敗", e);
+        setThreads([]);
+      }
     };
-    loadThreads();
-  }, [location.pathname]);
+    
+    loadData();
+  }, []);
   
   return (
     <div>
@@ -45,6 +53,7 @@ function App() {
           <Route path="/threads/new"
             element={<NewThread onCreated={refreshThreads} />}
           />
+          <Route path="/threads/:thread_id" element={<PostList />} />
           </Routes>
       </main>
     </div>

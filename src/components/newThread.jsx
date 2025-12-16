@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createThread } from "../api/threads";
+import { createThread } from "../api/Threads";
 
 function NewThread({ onCreated }) {
   const [title, setTitle] = useState('');
